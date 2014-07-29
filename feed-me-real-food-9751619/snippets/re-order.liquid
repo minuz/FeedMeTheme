@@ -1,0 +1,19 @@
+<div id="product-reorder">
+	<input type="submit" name="reorder" id="reorder" value="Re-Order This" class="button primary">
+</div>
+<script>
+	jQuery(function($) {
+		$( "#product-reorder" ).on("click", function() {
+			var jsonLineItems = {{ line_items | json }};
+			if(jsonLineItems != null && jsonLineItems.length > 0){
+				jQuery.each(jsonLineItems, function(index, item){
+					Shopify.addItem(item.variant_id, item.quantity);
+				});
+				//Add delay to redirect to checkout page in order to ensure all items have been added to cart on the async function Shopify.addItem
+				setTimeout(function(){
+				  window.location.href = "/cart"
+				}, 2000);
+			}
+		});
+	});
+</script>

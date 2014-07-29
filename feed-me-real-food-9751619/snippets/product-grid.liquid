@@ -29,6 +29,11 @@
         <s class="compare-at-price">{{ product.compare_at_price | money }}</s>
         {% endif %}
       </span>
+       <span>
+        <label for="item-quantity_{{ product.id }}">Quantity</label>
+        <input id="item-quantity_{{ product.id }}" type="number" min="0" step="1" value="1" class="quantity" />
+        <a class="button secondary" id="add_{{ product.id }}" href=""> {{ settings.text_addtocart }} </a>
+      </span>
   </div><!-- .prod-caption -->
 
   
