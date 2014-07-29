@@ -241,6 +241,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 		margin-bottom: 20px; }
 	fieldset {
 		margin-bottom: 20px; }
+	input[type="number"],
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
@@ -518,7 +519,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
         .container .offset-by-thirteen,
         .container .offset-by-fourteen,
         .container .offset-by-fifteen { padding-left: 0; }
-
+        
+        body.background-image {
+		  background: none !important;
+		  background-color: #fff;
+	    }
     }
 
 
@@ -551,6 +556,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
         .container .sixteen.columns,
         .container .one-third.column,
         .container .two-thirds.column { width: 420px; }
+
+        body.background-image {
+		  background: none !important;
+		  background-color: #fff;
+	    }
     }
 
 
@@ -597,7 +607,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       font-size: 14px;
     }
     body.background-image {
-    	background:url({{ 'background_image.jpg' | asset_url }} ) repeat;
+	  background: url({{ 'background_image.jpg' | asset_url }} ) no-repeat center center fixed; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
     }
     a,
     a:visited {
@@ -777,11 +791,12 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       border-top: 5px solid {{ settings.light_text_color }};
     }
     #main-menu li {
+	  text-transform:uppercase;
       display: block;
       position: relative;
       float: left;
       margin: 0;
-      padding: 0 30px 12px 0;
+      padding: 0 15px 12px 0;
     }
     #main-menu li:last-child {
       margin-right: 0;
@@ -1905,6 +1920,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 	/* Smaller than standard 960 (devices and browsers) */
 	@media only screen and (max-width: 959px) {
+		.nomobile { display:none!important;}
 		.desktop {display: none !important;}
 		.tablet {display: block !important;}
 		.logo { text-align: center}
@@ -1929,7 +1945,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	}
 
 	/* Tablet Portrait size to standard 960 (devices and browsers) */
-	@media only screen and (min-width: 768px) and (max-width: 959px) {}
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		.nomobile { display:none!important;}
+	}
 
 	/* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {

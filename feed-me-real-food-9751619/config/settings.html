@@ -70,11 +70,26 @@
   <legend>Typography</legend>
   <table>
     <tr>
+      <th><label for="nav_font">Navigation Bar</label></th>
+      <td>
+        <select name="nav_font" id="nav_font">
+          <optgroup label="Sans-serif">
+            <option value="'Arvo', sans-serif" selected="selected">Arvo</option>
+            <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica/Arial</option>
+          </optgroup>
+          <optgroup label="Serif">
+            <option value="Georgia, serif">Georgia</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+          </optgroup>
+        </select>
+      </td>
+    </tr>
+    <tr>
       <th><label for="header_font">Header</label></th>
       <td>
         <select name="header_font" id="header_font">
           <optgroup label="Sans-serif">
-            <option value="'Open Sans', sans-serif" selected="selected">Open Sans</option>
+            <option value="'Arvo', sans-serif" selected="selected">Arvo</option>
             <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica/Arial</option>
           </optgroup>
           <optgroup label="Serif">
@@ -89,6 +104,22 @@
       <td>
         <select name="body_font" id="body_font">
           <optgroup label="Sans-serif">
+            <option value="'Arvo', sans-serif" selected="selected">Arvo</option>
+            <option value="'Helvetica Neue', Helvetica, Arial, sans-serif" selected="selected">Helvetica/Arial</option>
+          </optgroup>
+          <optgroup label="Serif">
+            <option value="Georgia, serif">Georgia</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+          </optgroup>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="footer_font">Footer</label></th>
+      <td>
+        <select name="footer_font" id="footer_font">
+          <optgroup label="Sans-serif">
+            <option value="'Arvo', sans-serif" selected="selected">Arvo</option>
             <option value="'Helvetica Neue', Helvetica, Arial, sans-serif" selected="selected">Helvetica/Arial</option>
           </optgroup>
           <optgroup label="Serif">
@@ -110,8 +141,8 @@
       <td><input type="checkbox" id="use_logo" name="use_logo" /></td>
     </tr>
     <tr>
-      <th><label for="logo">Logo<br /><small>Max Height: 280px, Max Width: 500px, Format: PNG</small></label></th>
-      <td><input type="file" id="logo" name="logo.png" data-max-height="280" data-max-width="500" /></td>
+      <th><label for="logo">Logo<br /><small>Max Height: 400px, Max Width: 960px, Format: PNG</small></label></th>
+      <td><input type="file" id="logo" name="logo.png" /></td>
     </tr>
   </table>
   <h3>Tagline</h3>
@@ -256,6 +287,10 @@
     <tr>
       <th><label for="address_zip">Zip/Post Code</label></th>
       <td><input type="text" name="address_zip" id="address_zip" /></td>
+    </tr>
+    <tr>
+      <th><label for="phone_number">Phone</label></th>
+      <td><input type="text" name="phone_number" id="phone_number" /></td>
     </tr>
     <tr>
       <th><label for="address_email">Email Address</label></th>

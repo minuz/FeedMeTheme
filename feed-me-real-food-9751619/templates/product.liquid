@@ -83,7 +83,7 @@
         {% if variant.price < variant.compare_at_price %}
         <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>&nbsp;<s class="product-compare-price sb20 block">{{ variant.compare_at_price | money }}</s>
         {% else %}
-        <span class="product-price block sb20" itemprop="price">{{ variant.price | money }}</span>
+        <span class="product-price block sb20 st10" itemprop="price">{{ variant.price | money }}</span>
         {% endif %}
       </p>
     </div>        
@@ -94,21 +94,18 @@
 </form>
 
 {% if collection %}
-{% if collection.previous_product or collection.next_product %}
-<div class="tc">     
-  {% if collection.previous_product %}
-  {% capture prev_url %}{{ collection.previous_product}}#content{% endcapture %}
-  <span class="left">{{ '&larr; Previous Product' | link_to: prev_url }}</span>
-  {% endif %}
-  {% if collection.next_product %}
-  {% if collection.previous_product %}
-  <span> | </span>
-  {% endif %}
-  {% capture next_url %}{{ collection.next_product}}#content{% endcapture %}
-  <span class="right">{{ 'Next Product &rarr;' | link_to: next_url }}</span>
-  {% endif %}
-</div>
-{% endif %}
+{% assign collections_url = collections.products.url%}
+  <div class="tc">     
+    {% if collection.previous_product %}
+    {% capture prev_url %}{{ collection.previous_product}}#content{% endcapture %}
+    <span class="left nomobile">{{ '&larr; Previous Product' | link_to: prev_url }}</span>
+    {% endif %}
+    <span> | {{ 'All Products' | link_to: collections_url }} | </span>
+    {% if collection.next_product %}
+    {% capture next_url %}{{ collection.next_product}}#content{% endcapture %}
+    <span class="right nomobile">{{ 'Next Product &rarr;' | link_to: next_url }}</span>
+    {% endif %}
+  </div>
 {% endif %}
 
 {% include 'related-products' %}
