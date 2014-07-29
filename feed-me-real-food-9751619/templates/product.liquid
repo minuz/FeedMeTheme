@@ -21,11 +21,8 @@
         {% endif %}
         <h2 itemprop="brand">{{ product.vendor | link_to: vendor_url }}</h2>
       </div>
-      
-      <div id="product-description" class="rte" itemprop="description">
-        {{ product.description }}
-      </div>
-      
+      {% include 'products-tabs' %}
+
       
       {% assign hide_default_title = false %}
       {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
