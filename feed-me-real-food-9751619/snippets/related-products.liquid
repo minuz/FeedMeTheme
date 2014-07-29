@@ -31,3 +31,24 @@
     </ul>
   {% endif %}
 </div>
+<script>
+  (function() {    
+    var products = {{ collection.products | json }};
+    if(products != null && products.length > 0){
+      jQuery.each(products, function(index, product){
+        var quantity = 1;
+        $("#item-quantity_"+product.id).bind('keyup input', function (e){
+          quantity = $("#item-quantity_"+product.id).val();
+        });
+
+        $("#add_"+product.id).on("click", function (){
+          if($.isNumeric(quantity) && quantity > 0){
+            Shopify.addItem(product.variants[0].id, quantity);
+          }else{
+            alert("You must select a valid quantity.");
+          }
+        });
+      });
+    };
+  })();
+</script>
