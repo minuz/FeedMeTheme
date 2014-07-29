@@ -1,0 +1,40 @@
+
+<div id="buy-phone"  class="only-mobile border bottom clearfix">
+	{% assign product = collections[settings.featured_product].products.first %}
+	{% assign buy_phone = true %}
+	{% include 'buy' %}
+</div>
+
+<!--START VIDEO -->
+{% if settings.video_embed_code != blank %}
+<section id="product-video" class="thin-border pb20 bottom">
+	{{ settings.video_embed_code }}
+</section>
+{% endif %}
+
+<!--END Video-->
+
+{% if settings.home_page != blank %}
+<!--START PRODUCT FEATURES-->
+<section id="product-features">
+	{{ pages[settings.home_page].content }}
+</section>
+<!--END PRODUCT FEATURES-->
+{% elsif pages.about-us.content != blank %}
+	{{ pages.about-us.content }}
+{% else %}
+
+  <p>Nice! You've installed the Kickstand theme successfully, but you haven't specified which of your pages you would like to  show on the homepage. Head on over to the <a href="/admin/themes">Theme Settings</a> and add the page you would like to see.</p>
+  <p>
+  	<img src="{{ 'kickstandblankslate.jpg' | asset_url }}" style="border:1px solid #ddd" >
+  </p>
+{% endif %}
+
+
+<script>
+$(document).ready(function(){
+	$("#header-animate").addClass("animated fadeInDown")
+
+})
+</script>
+

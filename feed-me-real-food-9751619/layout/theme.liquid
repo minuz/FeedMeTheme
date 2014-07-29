@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="no-touch">
+<head>
+  <meta charset="utf-8" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+  <title>
+  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% include 'facebook-open-graph' %}
+  {% include 'twitter-cards' %}
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{ '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' | stylesheet_tag }}
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
+  <!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+  <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ 'apple-touch-icon-72x72.png' | asset_url }}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ 'apple-touch-icon-114x114.png' | asset_url }}">
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {{ "option_selection.js" | shopify_asset_url | script_tag }}
+  {% if template contains 'customers' %}
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+  {{ content_for_header }}
+</head>
+
+<body class="{{ template | replace: '.', '-' | replace: '/', ' ' }} {% if settings.use_background_image == true %}background-image{% endif %}">
+  <div id="cart-animation" style="display:none">1</div>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={% if settings.facebook_app_id == blank %}154732808021974{% else %}{{ settings.facebook_app_id }}{% endif%}";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  {% if linklists.main-menu.size > 0 %}
+  <nav id="navbar">
+    <div class="container">
+      <div class="columns">
+        <ul id="main-menu" class="drop">
+          {% for link in linklists.main-menu.links %}
+            {% assign child_list_handle = link.title | handleize %}
+            {% if linklists[child_list_handle].links != blank %}
+              <li class="has-dropdown{% if link.active %} main-menu--active{% endif %}" aria-haspopup="true">
+                <a href="{{ link.url }}" {% if link.active %} class="active"{% endif %}>{{ link.title | escape }} <span class="pointer"></span></a>
+                <ul class="drop-menu">
+                  {% for childlink in linklists[child_list_handle].links %}
+                    <li {% if childlink.active %}class="drop-menu--active"{% endif %}><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% else %}
+              <li {% if link.active %}class="main-menu--active"{% endif %}>
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% include 'customer-links' %}
+        </ul><!-- END MAIN-MENU -->
+        <ul id="main-menu-phone" class="drop">
+          <li class="no-mb has-dropdown"><a href="#">Menu <span class="pointer"></span></a>
+            <ul class="drop-menu">
+              {% for link in linklists.main-menu.links %}
+                <li {% if link.active %}class="main-menu--active"{% endif %}>
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+              {% include 'customer-links' %}
+            </ul>
+          </li>
+        </ul><!-- END MAIN-MENU-PHONE -->
+
+        <div id="mini-cart" >
+          <span class="cart-total-items ">
+            <a href="/cart">
+              <span id="cart-target" class="count">
+                {{ cart.item_count }}
+              </span>
+              <span class="nomobile">
+                {{ cart.item_count | pluralize: 'Item', 'Items' }} <span class="in-cart">in cart</span>
+              </span>
+            </a>
+          </span>
+          <a href="/cart"><span class="checkout">Check out</span></a>
+        </div><!-- END MINI CART-->
+      </div><!-- END COLUMNS-->
+    </div><!-- END CONTAINER-->
+  </nav><!--END NAVBAR-->
+  {% endif %}
+  <header>
+    <div class="container">
+      <div class="header-wrapper">
+        <div class=" sixteen columns thin-border sb30 pb30 bottom">
+          <div id="header-animate" class="table">
+            <h1 class="logo table-cell eight columns alpha omega">
+              {% if settings.use_logo %}
+              <a href="/" class=" ">
+                <img  class="" src="{{ 'logo.png'| asset_url }}" alt="{{ shop.name }}">
+              </a>
+              {% else %}
+              <a href="/">{{ shop.name }}</a>
+              {% endif %}
+            </h1>
+            {% if store_description != "" %}
+            <div class="header-store-description table-cell fl-none a">
+              {{ settings.store_description }}
+            </div>
+            {% endif %}
+          </div><!-- table -->
+        </div><!-- headerwrapper -->
+      </div>
+    </div><!-- END CONTAINER-->
+  </header>
+
+  <div class="container clearfix">
+    {% if template == 'index' or template == 'blog' or template == 'article' %}
+    <!--START MAIN-->
+    <div class="ten columns">
+      {{ content_for_layout }}
+    </div>
+    <!--END MAIN-->
+    <!--START SIDEBAR-->
+    <aside class="five columns offset-by-one nomobile">
+      {% if template == 'index' %}
+        <!--START STICKY-->
+        <div class="my-sticky-element">
+          <!--START BUY-->
+          <section id="buy" class="clearfix">
+            {% assign buy_phone = false %}
+            {% include 'buy' %}
+          </section>
+          <!--END BUY-->
+        </div>
+        <!--END STICKY-->
+        {% include 'social-sharing' %}
+
+        {% if settings.show_kickstarter_info == true %}
+        <!-- START KICKSTARTER-->
+        <section id="kickstarter" class="border bottom">
+          <h3>{{ settings.kickstarter_backers }}<span>Backers</span></h3>
+          <h3>{{ settings.kickstarter_pledged }}<span>Pledged of {{ settings.kickstarter_goal }} Goal</span></h3>
+        </section>
+        <!-- END KICKSTARTER-->
+        {% endif %}
+
+        {% include 'email-alerts' %}
+
+        {% unless settings.featured_product == blank or collections[settings.featured_product].empty? or collections[settings.featured_product].products_count <= 1 %}
+          <!-- START YOU MIGHT ALSO LIKE-->
+          <section id="you-might-also-like" class="thin-border top">
+            <h3>{{ settings.text_addtional_products_sidebar }}</h3>
+            {% for product in collections[settings.featured_product].products offset: 1 %}
+              <article class="five colums clearfix product {% unless forloop.last %}border bottom{% endunless %}">
+                <div class="two colums alpha">
+                  <img src="{{ product.featured_image | product_img_url: "small" }}" alt="{{ image.alt | escape }}" />
+                </div>
+                <div class="three columns omega info">
+                  <h4>
+                    {{ product.title }}
+                    <span class="block price">
+                      {% if product.compare_at_price > product.price %}
+                      <del class="block">{{ product.compare_at_price | money }}</del>
+                      <span class="block compare-at-price" id="price-{{ product.id }}">{{ product.price | money }}</span>
+                      {% else %}
+                      <span class="price" id="price-{{ product.id }}">{{ product.price | money }}</span>
+                      {% endif %}
+                    </span>
+                  </h4>
+                  <a href="{{ product.url }}" class="button secondary small">View product</a>
+                </div>
+              </article>
+            {% endfor %}
+          </section>
+          <!-- END YOU MIGHT ALSO LIKE-->
+        {% endunless %}
+
+        {% if blogs[settings.featured_blog].articles.size > 0 %}
+          {% include 'latest-posts' %}
+        {% endif %}
+
+        {% if blog.all_tags != blank %}
+        <!-- START TAGS -->
+        <section id="tags" class="thin-border top">
+          <h3>Tags</h3>
+          <ul>
+            {% for tag in blog.all_tags %}
+            <li><a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}">{{ tag }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+        <!-- END TAGS -->
+        {% endif %}
+
+      {% endif %}
+    </aside>
+    <!--END ASIDE-->
+    {% else %}
+      {{ content_for_layout }}
+    {% endif %}
+  </div>
+  <!-- END CONTAINER-->
+  <!-- START FOOTER -->
+  <footer class="border top">
+    <!-- START CONTAINER-->
+    <div class="container">
+      <div class="five columns">
+        <h3>{{ settings.text_footer_firstheading }}</h3>
+        {% if settings.about_body == blank %}<p>You can pick which page to display here in your <a href="/admin/themes">Theme Settings.</a></p>{% else %}{{ pages[settings.about_body].content }}{% endif %}
+      </div>
+      <div class="four columns offset-by-one">
+        <h3>{{ settings.text_footer_secondheading }}</h3>
+        <address>
+          {% if settings.address_line_1 == blank %}
+            <p>Add your contact information to theme settings and it will appear here.</p>
+          {% else %}
+            {{ settings.address_line_1 }}<br>
+            {% if settings.address_line_2 != blank %}{{ settings.address_line_2 }}<br>{% endif %}
+            {% if settings.address_town_city != blank %}{{ settings.address_town_city }}<br>{% endif %}
+            {% if settings.address_zip != blank %}{{ settings.address_zip }}<br>{% endif %}
+            {% if settings.address_email != blank %}<a href="mailto:{{ settings.address_email }}">{{ settings.address_email }}</a>{% endif %}
+          {% endif %}
+        </address>
+      </div>
+      <div class="five columns offset-by-one">
+        <h3>{{ settings.text_footer_thirdheading }}</h3>
+        {% if settings.mailchimp_form_action.size > 0 %}
+        <form action="{{ settings.mailchimp_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+          <input type="email" placeholder="Your Email Address" name="EMAIL" id="email-input" />
+          <input type="submit" value="Subscribe" class="button secondary" id="email-submit" />
+        </form>
+        {% else %}
+          <form id="email-alerts-footer" class="mini-contact-form" action="/contact" method="post">
+            <input type="hidden" value="customer" name="form_type">
+            <p class="success"><em>Thank you for signing up!</em></p>
+            <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,email-alerts" />
+            <input type="hidden" id="newsletter-first-name" name="contact[first_name]" value="Subscriber" />
+            <input type="hidden" id="newsletter-last-name" name="contact[last_name]" value="Email Alerts" />
+            <input type="email" placeholder="Your Email Address" name="contact[email]" id="email-input" class="required email" />
+            <input type="submit" value="Subscribe" class="button secondary" name="subscribe" id="email-submit" />
+          </form>
+        {% endif %}
+      </div>
+    </div>
+    <!-- END CONTAINER-->
+    <!-- START CONTAINER-->
+    <div class="container">
+      <div class="sixteen columns">
+        <div id="payment-methods">
+          {% for type in shop.enabled_payment_types %}
+          <img width="50" src="{{ type | payment_type_img_url }}" />
+          {% endfor %}
+        </div>
+        <p class="copyright tc">
+          &copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}.
+          All rights reserved {{ powered_by_link }}.
+          {% if settings.facebook_page_url != blank %}
+          <span>&#124;</span>
+          <a href="{{ settings.facebook_page_url }}">Facebook</a>
+          {% endif %}
+          {% if settings.pinterest_page_url != blank %}
+          <span>&#124;</span>
+          <a href="{{ settings.pinterest_page_url }}">Pinterest</a>
+          {% endif %}
+          {% if settings.twitter_username != blank %}
+          <span>&#124;</span>
+          <a href="http://www.twitter.com/{{ settings.twitter_username | remove: '@' }}">Twitter</a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+    <!-- END CONTAINER-->
+  </footer>
+
+  {% assign featuredproduct = collections[settings.featured_product].products.first %}
+
+  {% if template == 'index' %}
+    {% if settings.featured_product != blank %}
+
+      {% if product.available %}
+        {% if featuredproduct.variants.size > 1 %}
+        <script>
+        // <![CDATA[
+        var selectCallback = function(variant, selector) {
+	
+          if (variant && variant.featured_image) {
+            var newImage = variant.featured_image;
+            var mainImageEl = jQuery('#buy #home-featured-image img')[0];
+            var mainImagePhone = jQuery('#buy-phone #home-featured-image img')[0];
+            Shopify.Image.switchImage(newImage, mainImageEl, KickstandTheme.switchImage);  
+            Shopify.Image.switchImage(newImage, mainImagePhone, KickstandTheme.switchImage); 
+          }
+					
+          if (variant && variant.available == true) {
+            // selected a valid variant
+            jQuery('.add-to-cart').removeClass('disabled').removeAttr('disabled'); // remove unavailable class from add-to- cart button, and re-enable button
+            jQuery('.featured-product.price').html(Shopify.formatMoney(variant.price, "{{shop.money_format }}"));  // update  price field
+          } else {
+            // variant doesn't exist
+            jQuery('.add-to-cart').addClass('disabled').attr('disabled', 'disabled');      // set add-to-cart button to   unavailable class and disable button
+            var message = variant ? "<span>Sold Out</span>" : "<span>Unavailable</span>";
+            jQuery('.featured-product.price').html(message); // update price-field message
+          }
+        };
+        // initialize multi selector for product
+        jQuery(function() {
+          new Shopify.OptionSelectors("product-select", { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true }) ;
+          new Shopify.OptionSelectors("product-select-phone", { product: {{ product | json }}, onVariantSelected:   selectCallback, enableHistoryState: true });
+          {% assign found_one_in_stock = false %}
+          {% for variant in product.variants %}
+          {% if variant.available and found_one_in_stock == false %}
+            {% assign found_one_in_stock = true %}
+            {% for option in product.options %}
+            jQuery('#product-select-option-{{ forloop.index0 }}').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+            jQuery('#product-select-phone-option-{{ forloop.index0 }}').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+          {% endfor %}
+          {% endif %}
+        {% endfor %}
+        });
+        // ]]>
+        </script>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    <script>
+
+    $(document).ready(function() {
+
+      {% if settings.featured_product != blank %}
+       // Sync the selects in the two buy elements on the page
+       var set1 = 'product-select';
+       var set2 = 'product-select-phone';
+       $("select").on("change", function() {
+          var id = $(this).attr("id");
+          if (id.indexOf(set2) !== -1) {
+              var sync = id.replace(set2, set1);
+          } else {
+              var sync = id.replace(set1,set2);
+          }
+          $("#"+sync).val($(this).val());
+      });
+      {% endif %}
+
+       // Responsive Video.
+       $("#product-video").fitVids();
+
+    });
+    $(window).load(function(){
+      $('.my-sticky-element').waypoint('sticky', {
+        offset: -280,
+        handler: function(dir) {
+            $("#buy img").toggle()
+            $("#buy .product-description").toggle()
+            $(".my-sticky-element").toggleClass("animated bounceInDown pt20")
+        }
+      });
+    })
+    </script>
+
+  {% endif %}
+
+  {% unless template == 'index' %}
+  {% if settings.home_page != blank %}
+  <script>
+  var featuredContent = {{ pages[settings.home_page].content | json }};
+  </script>
+  {% endif %}
+  {% endunless %}
+
+  {{ 'jquery.plugins.js' | asset_url | script_tag }}
+  {{ 'jquery.theme.js' | asset_url | script_tag }}
+
+</body>
+</html>
