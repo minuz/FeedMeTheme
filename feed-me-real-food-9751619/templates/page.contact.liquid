@@ -1,5 +1,5 @@
-<div class="wysiwyg">
-{{ page.content }}
+<div class="wysiwyg sixteen columns">
+  {{ page.content }}
 </div>
 {% form 'contact' %}
 
@@ -9,38 +9,49 @@
 </div>
 {% endif %}
 
-<div class="contact-form">
-{% if form.errors %}
-<div class="errorForm feedback">
-  <!-- {{ form.errors.size }} or {{ form.errors | size }} -->
-  <p>Oops, sorry. We were unable to submit your inquiry because it contained {{ form.errors | size | pluralize: 'an error', 'a few errors' }}. Please correct the following and submit again:</p>
-  {% for field in form.errors %}
+<div class="contact-form eight columns">
+  {% if form.errors %}
+  <div class="errorForm feedback">
+    <!-- {{ form.errors.size }} or {{ form.errors | size }} -->
+    <p>Oops, sorry. We were unable to submit your inquiry because it contained {{ form.errors | size | pluralize: 'an error', 'a few errors' }}. Please correct the following and submit again:</p>
+    {% for field in form.errors %}
     <p>The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}.</p>
-  {% endfor %}
-</div>
-{% endif %}
- 
-<div id="contactFormWrapper">
-  <p>
-    <label>Your Name:</label>
-    <input type="text" id="contactFormName" name="contact[name]" placeholder="John Doe" />
-  </p>
-  <p>
-    <label>Email:</label>
-    <input type="email" id="contactFormEmail" name="contact[email]" placeholder="john@example.com" />
-  </p>
-  <p>
-    <label>Phone Number:</label>
-    <input type="telephone" id="contactFormTelephone" name="contact[phone]" placeholder="555-555-1234" />
-  </p> 
-  <p>
-    <label>Message:</label>
-    <textarea rows="15" cols="75" id="contactFormMessage" name="contact[body]" placeholder="Your Message"></textarea>
-  </p>
-  <p>
-    <input type="submit" id="contactFormSubmit" value="SEND" />
-  </p>        	
-</div><!-- contactWrapper -->
+    {% endfor %}
+  </div>
+  {% endif %}
 
-{% endform %}
+  <div id="contactFormWrapper">
+    <p>
+      <label>Your Name:</label>
+      <input type="text" id="contactFormName" name="contact[name]" placeholder="John Doe" />
+    </p>
+    <p>
+      <label>Email:</label>
+      <input type="email" id="contactFormEmail" name="contact[email]" placeholder="john@example.com" />
+    </p>
+    <p>
+      <label>Phone Number:</label>
+      <input type="telephone" id="contactFormTelephone" name="contact[phone]" placeholder="555-555-1234" />
+    </p> 
+    <p>
+      <label>Message:</label>
+      <textarea rows="15" cols="75" id="contactFormMessage" name="contact[body]" placeholder="Your Message"></textarea>
+    </p>
+    <p>
+      <input type="submit" id="contactFormSubmit" value="SEND" class="button primary" />
+    </p>          
+  </div><!-- contactWrapper -->
+
+  {% endform %}
+</div>
+<div class="eight columns nomobile">
+{% assign map-width = 450 %}
+{% assign map-height = 435 %}
+{% include 'feed-me-map' %}
+</div>
+
+<div id="address-phone"  class="only-mobile border bottom clearfix">
+{% assign map-width = 300 %}
+{% assign map-height = 300 %}
+{% include 'feed-me-map' %}
 </div>
