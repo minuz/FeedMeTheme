@@ -1,4 +1,6 @@
-<div class="wysiwyg sixteen columns">
+<div class="sixteen columns">
+{% if settings.use_title  %}
 <h2>{{ page.title }}</h2>
+{% endif %}
 {{ page.content }}
 </div>
