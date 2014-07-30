@@ -1,0 +1,68 @@
+<!-- START CONTAINER-->
+    <div class="container default-background-color border top">
+      <div class="five columns">
+        <h3>{{ settings.text_footer_firstheading }}</h3>
+        {% if settings.about_body == blank %}<p>You can pick which page to display here in your <a href="/admin/themes">Theme Settings.</a></p>{% else %}{{ pages[settings.about_body].content }}{% endif %}
+      </div>
+      <div class="four columns offset-by-one tc">
+        <h3>{{ settings.text_footer_secondheading }}</h3>
+        <address>
+          {% if settings.address_line_1 == blank %}
+            <p>Add your contact information to theme settings and it will appear here.</p>
+          {% else %}
+            {{ settings.address_line_1 }}<br>
+            {% if settings.address_line_2 != blank %}{{ settings.address_line_2 }}<br>{% endif %}
+            {% if settings.address_town_city != blank %}{{ settings.address_town_city }}<br>{% endif %}
+            {% if settings.address_zip != blank %}{{ settings.address_zip }}<br>{% endif %}
+            {% if settings.address_email != blank %}<a href="mailto:{{ settings.address_email }}">{{ settings.address_email }}</a>{% endif %}
+          {% endif %}
+        </address>
+      </div>
+      <div class="five columns offset-by-one nomobile">
+        <h3>{{ settings.text_footer_thirdheading }}</h3>
+        {% if settings.mailchimp_form_action.size > 0 %}
+        <form action="{{ settings.mailchimp_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+          <input type="email" placeholder="Your Email Address" name="EMAIL" id="email-input" />
+          <input type="submit" value="Subscribe" class="button secondary" id="email-submit" />
+        </form>
+        {% else %}
+          <form id="email-alerts-footer" class="mini-contact-form" action="/contact" method="post">
+            <input type="hidden" value="customer" name="form_type">
+            <p class="success"><em>Thank you for signing up!</em></p>
+            <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,email-alerts" />
+            <input type="hidden" id="newsletter-first-name" name="contact[first_name]" value="Subscriber" />
+            <input type="hidden" id="newsletter-last-name" name="contact[last_name]" value="Email Alerts" />
+            <input type="email" placeholder="Your Email Address" name="contact[email]" id="email-input" class="required email" />
+            <input type="submit" value="Subscribe" class="button secondary" name="subscribe" id="email-submit" />
+          </form>
+        {% endif %}
+      </div>
+    </div>
+    <!-- END CONTAINER-->
+    <!-- START CONTAINER-->
+    <div class="container default-background-color border top">
+      <div class="sixteen columns">
+        <div id="payment-methods">
+          {% for type in shop.enabled_payment_types %}
+          <img width="50" src="{{ type | payment_type_img_url }}" />
+          {% endfor %}
+        </div>
+        <p class="copyright tc">
+          &copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}.
+          All rights reserved {{ powered_by_link }}.
+          {% if settings.facebook_page_url != blank %}
+          <span>&#124;</span>
+          <a href="{{ settings.facebook_page_url }}">Facebook</a>
+          {% endif %}
+          {% if settings.pinterest_page_url != blank %}
+          <span>&#124;</span>
+          <a href="{{ settings.pinterest_page_url }}">Pinterest</a>
+          {% endif %}
+          {% if settings.twitter_username != blank %}
+          <span>&#124;</span>
+          <a href="http://www.twitter.com/{{ settings.twitter_username | remove: '@' }}">Twitter</a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+    <!-- END CONTAINER-->
