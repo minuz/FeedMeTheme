@@ -1,74 +1,61 @@
 {% if settings.featured_product == blank or collections[settings.featured_product].empty? %}
-
 <h3>You need to select a collection</h3>
-
 <p class="sb20 block">Go to your <a href="/admin/themes/{{ theme.id }}/settings">Theme Settings</a> and select a collection in the Featured Product section.</p>
-
 {% elsif collections[settings.featured_product].products_count == 0 %}
-
 <h3>You need to add a product to your {{ collections[settings.featured_product].title }} collection</a>.</h3>
-
 <p class="sb20 block">Go to your <a href="/admin/collections">Collections page</a> and add a product to your collection.</p>
-
 {% else %}
-
 {% assign featuredproduct = collections[settings.featured_product].products.first %}
-	
-<h3>{{ featuredproduct.title }}</h3>
-
 {% assign featured_image = featuredproduct.selected_or_first_available_variant.featured_image | default: featuredproduct.featured_image %}
-<div id="home-featured-image">
+<div id="home-featured-image" class="st10">
 	<a href="{{ featured_image.src | img_url: '1024x1024' }}" class="fancybox">
-  		<img src="{{ featured_image.src | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}" />
+	<img src="{{ featured_image.src | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}" />
 	</a>
 </div>
-
+<h3>{{ featuredproduct.title }}</h3>
 {% if settings.brief_product_description != blank %}
 <p class="product-description">
-  {{ settings.brief_product_description }}
+	{{ settings.brief_product_description }}
 </p>
 {% endif %}
-
 {% if featuredproduct.available %}
-
 <form method="post" action="/cart/add" class="st10 quickAdd">
-  
-  {% if featuredproduct.variants.size > 1 %}
+	{% if featuredproduct.variants.size > 1 %}
 	<!-- START VARIANTS -->
 	<select name="id" {% if buy_phone == true %}id="product-select"{% else %}id="product-select-phone"{% endif %}>
-	{% for variant in featuredproduct.variants %}
+		{% for variant in featuredproduct.variants %}
 		{% if variant.available %}
 		<option value="{{ variant.id }}"{% if variant == featuredproduct.selected_or_first_available_variant %} selected{% endif %}>{{ variant.title | escape }} ({{ variant.price | money }})</option>
 		{% else %}
 		<option value="{{ variant.id }}" disabled="disabled"{% if variant == featuredproduct.selected_or_first_available_variant %} selected{% endif %}>{{ variant.title | escape }} ({{ variant.price | money }}) - 	SOLD OUT</option>
 		{% endif %}
-	{% endfor %}
+		{% endfor %}
 	</select>
 	<!-- END VARIANTS -->
-  {% else %}
+	{% else %}
 	<input type="hidden" name="id" value="{{ featuredproduct.variants.first.id }}" />
-  {% endif %}
-  
-	<span class="featured-product price">
-	  {% assign variant = featuredproduct.selected_or_first_available_variant %}
-	  <span>{{ variant.price | money }}</span>
+	{% endif %}
+	<span class="featured-product price no-mt">
+		{% assign variant = featuredproduct.selected_or_first_available_variant %}
+		<h2>{{ variant.price | money }}</h2>
 		{% if variant.compare_at_price > variant.price %}
-	  <del>{{ variant.compare_at_price | money }}</del>
-	  {% endif %}
+		<del>{{ variant.compare_at_price | money }}</del>
+		{% endif %}
 	</span>	
-	
-	<input type="submit" value="{{ settings.text_addtocart }}" class=" add-to-cart addtocart button primary">
-	
+	<input id="featured-quantity" type="number" value="1" min="0" name="quantity" class="quantity featured" />
+	<input type="submit" value="{{ settings.text_addtocart }}" class=" add-to-cart addtocart button secondary" />
 </form>
-
 {% else %}
-
 <p>
-  <a class="button primary" href="{{ featuredproduct.url | within: collections[settings.featured_product] }}">View Product</a>
+	<a class="button primary" href="{{ featuredproduct.url | within: collections[settings.featured_product] }}">View Product</a>
 </p>
-
 {% endif %}
-
 {% endif %}
-
 <div style="clear:both"></div>
+<script>
+	$("#featured-quantity").bind('keyup input', function (e){
+		var qty = $("#quantity").val();
+		console.log(qty);
+	  	$("#cart-animation").text(qty);
+	});
+</script>

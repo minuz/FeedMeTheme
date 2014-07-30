@@ -1,21 +1,21 @@
-    <!-- START CONTAINER-->
-    <div class="container">
-      <div class="header-wrapper fixed-height">
-          {% if settings.use_logo %}
-          <div class="logo alpha omega">
-           <img  class="" src="{{ 'logo.png'| asset_url }}" alt="{{ shop.name }}">
+<!-- START CONTAINER-->
+<div class="container">
+  <div class="header-wrapper fixed-height">
+      {% if settings.use_logo %}
+      <div class="logo alpha omega">
+       <img  class="" src="{{ 'logo.png'| asset_url }}" alt="{{ shop.name }}">
+      </div>
+      {% else %}
+      <div class="table">
+        <h1 class="logo table-cell eight columns alpha omega">
+          <a href="/">{{ shop.name }}</a>
+        </h1>
+        {% if store_description != "" %}
+          <div class="header-store-description table-cell fl-none a">
+            {{ settings.store_description }}
           </div>
-          {% else %}
-          <div class="table">
-            <h1 class="logo table-cell eight columns alpha omega">
-              <a href="/">{{ shop.name }}</a>
-            </h1>
-            {% if store_description != "" %}
-              <div class="header-store-description table-cell fl-none a">
-                {{ settings.store_description }}
-              </div>
-            {% endif %}
-          </div><!-- table -->  
-          {% endif %}
-        </div><!-- headerwrapper -->
-    </div><!-- END CONTAINER-->
+        {% endif %}
+      </div><!-- table -->  
+      {% endif %}
+    </div><!-- headerwrapper -->
+</div><!-- END CONTAINER-->

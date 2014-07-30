@@ -170,9 +170,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	  border: 1px solid #aaa;
 	  border-top: 1px solid #ccc;
 	  border-left: 1px solid #ccc;
-	  -moz-border-radius: 3px;
-	  -webkit-border-radius: 3px;
-	  border-radius: 3px;
+	  -moz-border-radius: 5px;
+	  -webkit-border-radius: 5px;
+	  border-radius: 5px;
 	  color: #444;
 	  display: inline-block;
 	  font-size: 11px;
@@ -182,7 +182,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	  cursor: pointer;
 	  margin-bottom: 20px;
 	  line-height: normal;
-	  padding: 8px 10px;
+	  padding: 10px 10px;
 	  font-family: {{ settings.body_font }}
 	}
 
@@ -652,7 +652,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       text-shadow: none !important;
       font-family: {{ settings.header_font }}!important;
       font-weight: {% if settings.header_font contains 'Arvo' %}600 !important{% else %}normal !important{% endif %};
-      padding: 8px 15px !important;
+      padding: 10px 15px !important;
       -webkit-appearance: none;
     }
 
@@ -715,14 +715,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       margin-bottom: 20px;
       font-size: 44px;
       font-family: {{ settings.header_font }} !important;
-      font-weight: {% if settings.header_font contains 'Arvo' %}400{% else %}normal{% endif %};
+      font-weight: {% if settings.header_font contains 'Arvo' %}500{% else %}normal{% endif %};
       color: {{ settings.heading_color }};
     }
     h2 {
       margin-bottom: 20px;
       font-size: 28px;
       font-family: {{ settings.header_font }} !important;
-      font-weight: {% if settings.header_font contains 'Arvo' %}700{% else %}bold{% endif %};
+      font-weight: {% if settings.header_font contains 'Arvo' %}400{% else %}bold{% endif %};
       line-height: 120%;
       color: {{ settings.heading_color }};
     }
