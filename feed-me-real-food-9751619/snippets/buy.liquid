@@ -53,9 +53,13 @@
 {% endif %}
 <div style="clear:both"></div>
 <script>
-	$("#featured-quantity").bind('keyup input', function (e){
+$(document).ready(function(){
+	$("#featured-quantity").bind('change keyup input', function (e){
+		console.log("binding worked.");
 		var qty = $("#quantity").val();
 		console.log(qty);
 	  	$("#cart-animation").text(qty);
 	});
+	console.log(input);
+});
 </script>

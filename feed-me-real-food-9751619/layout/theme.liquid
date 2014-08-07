@@ -50,7 +50,7 @@
     {% include 'site-header'%}
   </header>
 
-  <div class="container clearfix default-background-color">
+  <div class="container clearfix default-background-color safari-container">
     {% if template == 'index' or template == 'blog' or template == 'article' %}
     <!--START MAIN-->
     <div class="ten columns">
@@ -61,6 +61,10 @@
     <aside class="five columns offset-by-one nomobile">
       {% if template == 'index' %}
         {% include 'index-sidebar' %}
+      {% elsif template == 'blog' %}
+        {% include 'blog-sidebar' %}
+      {% elsif template == 'article' %}
+        {% include 'latest-posts' %}
       {% endif %}
     </aside>
     <!--END ASIDE-->
@@ -70,7 +74,7 @@
   </div>
   <!-- END CONTAINER-->
   <!-- START FOOTER -->
-  <footer class="no-mt no-border">
+  <footer class="no-mt no-border safari-footer">
     {% include 'site-footer' %}
   </footer>
 

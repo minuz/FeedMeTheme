@@ -5,15 +5,16 @@
         {% if settings.about_body == blank %}<p>You can pick which page to display here in your <a href="/admin/themes">Theme Settings.</a></p>{% else %}{{ pages[settings.about_body].content }}{% endif %}
       </div>
       <div class="four columns offset-by-one tc">
-        <h3>{{ settings.text_footer_secondheading }}</h3>
         <address>
+          <h3>{{ settings.text_footer_secondheading }}</h3>
+
           {% if settings.address_line_1 == blank %}
             <p>Add your contact information to theme settings and it will appear here.</p>
           {% else %}
-            {{ settings.address_line_1 }}<br>
-            {% if settings.address_line_2 != blank %}{{ settings.address_line_2 }}<br>{% endif %}
-            {% if settings.address_town_city != blank %}{{ settings.address_town_city }}<br>{% endif %}
-            {% if settings.address_zip != blank %}{{ settings.address_zip }}<br>{% endif %}
+            {{ settings.address_line_1 }}
+            {% if settings.address_line_2 != blank %}{{ settings.address_line_2 }}{% endif %}
+            {% if settings.address_town_city != blank %}{{ settings.address_town_city }}{% endif %}
+            {% if settings.address_zip != blank %} - {{ settings.address_zip }}{% endif %}
             {% if settings.address_email != blank %}<a href="mailto:{{ settings.address_email }}">{{ settings.address_email }}</a>{% endif %}
           {% endif %}
         </address>

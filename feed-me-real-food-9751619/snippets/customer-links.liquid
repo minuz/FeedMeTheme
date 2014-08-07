@@ -6,3 +6,11 @@
     <li>{{ settings.customer_login_link_text | customer_login_link }}</li>
   {% endif %}
 {% endif %}
+
+<script>
+$(function(){
+	$("#customer_logout_link").on('click', function (){
+		Shopify.clear();
+	});
+})();
+</script>

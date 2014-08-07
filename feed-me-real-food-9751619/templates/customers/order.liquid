@@ -60,7 +60,7 @@
 				  <thead>
 				    <tr>
 				      <th>Product</th>
-				      <th>SKU</th>
+				      <th class="nomobile">SKU</th>
 				      <th>Price</th>
 				      <th class="center">Quantity</th>
 				      <th class="total">Total</th>
@@ -80,7 +80,7 @@
 				          </div>
 				        {% endif %}
 				      </td>
-				      <td class="sku note">{{ line_item.sku }}</td>
+				      <td class="sku note nomobile">{{ line_item.sku }}</td>
 				      <td class="money">{{ line_item.price | money }}</td>
 				      <td class="quantity center">{{ line_item.quantity }}</td>
 				      <td class="total money">{{ line_item.quantity | times: line_item.price | money }}</td>
@@ -118,6 +118,12 @@
 				      <td class="label" colspan="4"><strong>Total:</strong></td>
 				      <td class="total money"><strong>{{ order.total_price | money }} {{ order.currency }}</strong></td>
 				    </tr>   
+				    <tr>
+				    <td>
+				    {% assign line_items = order.line_items %}
+				    {% include 're-order' %}
+				    </td>
+				    </tr> 
 				  </tfoot>  
 				</table>
 			</div>

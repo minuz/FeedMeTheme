@@ -1,8 +1,8 @@
-<div class="st40">
+<div>
 {% paginate collection.products by 12 %}
 
 {% if collection.description.size > 0 %}
-<div class="sixteen columns">
+<div class="sixteen columns st40">
 <div class="rte sb30">
   {{ collection.description }}
 </div>
@@ -40,7 +40,8 @@
           if($.isNumeric(quantity) && quantity > 0){
             Shopify.addItem(product.variants[0].id, quantity);
           }else{
-            alert("You must select a valid quantity.");
+            alert("You must select a valid quantity!");
+            return;
           }
         });
       });

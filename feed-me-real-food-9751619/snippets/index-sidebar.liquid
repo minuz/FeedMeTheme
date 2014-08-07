@@ -46,7 +46,9 @@
           </section>
           <!-- END YOU MIGHT ALSO LIKE-->
         {% endunless %}
-          
+          <section id="referral">
+            {% include 'referral' %}
+          </section>
         {% if blogs[settings.featured_blog].articles.size > 0 %}
           {% include 'latest-posts' %}
         {% endif %}
