@@ -3,7 +3,7 @@
   <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}" />
   <form action="/cart/add" method="post" enctype="multipart/form-data">
 
-    <div class="eight columns row">
+    <div class="nine columns row">
       <div id="product-details">
 
         <div id="product-title" class="sb30">
@@ -26,7 +26,7 @@
   </div><!-- eight columns -->
 
   <!-- START RIGHT COLUMN -->
-  <div class="eight columns last row">
+  <div class="seven columns last row">
     <div id="product-photos" class="safari-fix">    
       {% if product.images.size == 0 %}
       <div id="product-photo-container">
@@ -65,13 +65,13 @@
        </select>
      </div>
 
-    <div id="product-add" class="four columns alpha">
+    <div id="product-add" class="five columns alpha">
       <label for="item-quantity">Quantity</label>
       <input id="item-quantity" type="number" min="1" step="1" value="1" class="quantity" />
       <input type="submit" name="add" id="add" value="{{ settings.text_addtocart }}" class="button secondary">
     </div>
 
-     <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="four columns omega">
+     <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="two columns omega">
       <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
       {% if product.available %}
       <link itemprop="availability" href="http://schema.org/InStock" />

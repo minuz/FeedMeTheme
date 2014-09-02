@@ -1,0 +1,32 @@
+<div>
+<p>Select your local delivery to one of the following locations.</p>
+	<input type="radio" name="attributes[delivery-location]" value="Feed Me premises, Botany" checked="true"> Feed Me premises, Botany<br>
+	<input type="radio" name="attributes[delivery-location]" value="Shiralee Meats, Brookvale"> Shiralee Meats, Brookvale<br>
+<!-- 	<input type="radio" name="attributes[delivery-location]" value="Health Space Clinics, Newtown"> Health Space Clinics, Newtown<br>
+	<input type="radio" name="attributes[delivery-location]" value="Primal FHN, Caringbah"> Primal FHN, Caringbah<br> -->
+</div>	
+{% comment %}
+
+<script>
+(function(){
+	$("#checkout-button").on("click", function(){
+        setTimeout(function(){
+			var location = $("input:radio[name='properties[delivery-location]]:checked").val();
+			var message = "Please, deliver my order to " + location + ".";
+			console.log(message);
+			$("#note").append(message);
+        }, 1500);
+	});
+})();
+</script>{% endcomment %}
+{% comment %}
+{% assign attribute = 'delivery-location' %}
+<!-- Below, set the upper-bound number to the number of radios -->
+{% for i in (1..4) %}
+  <!-- List your options here, captain... -->
+  {% capture option %}
+  {% cycle 'Feed Me premises - Botany', 'Shiralee Meats - Brookvale', 'Health Space Clinics - Newtown', 'Primal FHN - Caringbah' %}
+  {% endcapture %}
+  <input type="radio" id="{{ option }}-{{ i }}" name="attributes[{{ attribute }}]" value="{{ option }}"{% if cart.attributes[attribute] == option %} checked="checked"{% endif %} />
+  <label for="{{ option }}-{{ i }}">{{ option }}</label>
+{% endfor %}{% endcomment %}

@@ -34,7 +34,7 @@
 				<div class="clearfix">
 					<img src="{{ item | img_url : 'small' }}" alt="{{ item.title | escape }}" />
 					<div class="info">
-            <h3><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
+						<h3><a href="{{ item.url }}">{{ item.title | escape }}</a></h3>
 						<p class="summary">{{ item.product.description | strip_html | truncatewords: 25 }}</p>
 						<div class="phone">
 							<p class="price">{{ item.price | money }}</p>
@@ -64,19 +64,27 @@
 	<!-- START CHECKOUT-->
 	<section id="checkout">
 		<div class="sixteen columns clearfix">
-			<div class="eight columns alpha">
+			<div class="ten columns alpha">
+			<h3>Would you like to pick up your order? <a href="#" id="select-location">Click here</a> and let us know where! </h3>
 				<h4>Special Instructions</h4>
 				<p>Is there anything you want to tell us about your order?</p>
 				<textarea id="note" name="note"></textarea>
+				{% include 'snippet-local-delivery-cart' %}
 			</div>
-			<div class="five columns offset-by-three omega clearfix">
+			<div class="six columns omega clearfix">
 				<h3 class="total"><span class="phone">Total:</span> {{ cart.total_price | money }}</h3>
 				<div id="actions" class="clearfix">
+					<p style="float:left; text-align:right; clear: both; margin: 10px 0;">
+						<input style="float:none; vertical-align:middle;" type="checkbox" id="agree" />
+						<label style="display:inline; float:none" for="agree">
+							I agree with the <a href="/pages/terms-and-conditions">terms and conditions</a>.
+						</label>
+					</p>
 					<div class="two columns alpha">
 						<input type="submit" value="Update" name="update" class="button secondary desktop" />
 					</div>
 					<div class="three columns omega">
-						<input type="submit" value="Checkout" name="checkout" class="button primary" />
+						<input id="checkout-button" type="submit" value="Checkout" name="checkout" class="button primary" />
 					</div>
 				</div>
 			</div>
@@ -121,3 +129,30 @@
   })();
 </script>
 {% endif %}
+
+<div id="agree-with-terms" title="Terms & Conditions">
+	<span>You must agree with the terms and conditions of sales to check out.</span>
+</div>
+
+<script>
+	$('[name="checkout"], input[name="goto_pp"], input[name="goto_gc"]').click(function() {
+		if($('#agree').is(':checked')){
+			$(this).submit();
+		}
+		else{
+			$("#agree-with-terms").dialog("open");
+			return false;
+		}
+	});   
+
+	$( "#agree-with-terms" ).dialog({
+         autoOpen: false,  
+         width: 300,
+         height: "auto",
+         modal:true
+      });
+
+	$('#select-location').click(function(){
+		$('#order-delivery').dialog("open" );
+	});
+</script>

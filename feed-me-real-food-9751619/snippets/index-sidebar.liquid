@@ -48,11 +48,14 @@
         {% endunless %}
           <section id="referral">
             {% include 'referral' %}
+            {% include 'social-sharing' %}
+          </section>
+          <section>
+            {% include 'featuring-feedme' %}
           </section>
         {% if blogs[settings.featured_blog].articles.size > 0 %}
           {% include 'latest-posts' %}
         {% endif %}
-          
         {% if blog.all_tags != blank %}
         <!-- START TAGS -->
         <section id="tags" class="thin-border top">

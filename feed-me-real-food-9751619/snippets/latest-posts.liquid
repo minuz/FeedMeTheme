@@ -2,7 +2,7 @@
 <section id="from-the-blog" class="thin-border top {% unless template == 'index' %}latest-posts{% endunless %}">
 	 <a href="/blogs/{{ blogs[settings.featured_blog].handle }}.atom" class="rss"></a>
 	<h3>{% if template == 'index' %}From the Blog{% else %}Latest Posts{% endif %}</h3>
-	{% for article in blogs[settings.featured_blog].articles | limit: 3 %}
+	{% for article in blogs[settings.featured_blog].articles | limit: 2 %}
 	<article {% if template == 'blog' or template == 'article' %}{% unless forloop.last %}class="border bottom" {% endunless %}{% else %}class="border bottom"{% endif %}>
 		<h4><a href="{{ article.url }}">{{ article.title | escape }}</a></h4>
 		<h5>Posted by {{ article.author }} on {{ article.created_at | date: "%B %d, %Y" }}</h5>

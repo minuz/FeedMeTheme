@@ -16,6 +16,7 @@
   {{ '//fonts.googleapis.com/css?family=Arvo:400,400italic,700,700italic' | stylesheet_tag }}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'theme.custom.css' | asset_url | stylesheet_tag }}
+  {{ '//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css' | stylesheet_tag }}
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
   <!--[if lt IE 9]>
   <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -60,6 +61,8 @@
     <!--START SIDEBAR-->
     <aside class="five columns offset-by-one nomobile">
       {% if template == 'index' %}
+                  <h3>Special of the Week</h3>
+
         {% include 'index-sidebar' %}
       {% elsif template == 'blog' %}
         {% include 'blog-sidebar' %}
@@ -175,6 +178,7 @@
 
   {{ 'jquery.plugins.js' | asset_url | script_tag }}
   {{ 'jquery.theme.js' | asset_url | script_tag }}
+  {{ '//code.jquery.com/ui/1.11.1/jquery-ui.js' | script_tag }}
 
 </body>
 </html>
