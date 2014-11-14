@@ -1,24 +1,28 @@
 <!-- START FROM THE BLOG -->
-<section id="from-the-blog" class="thin-border top {% unless template == 'index' %}latest-posts{% endunless %}">
-	 <a href="/blogs/{{ blogs[settings.featured_blog].handle }}.atom" class="rss"></a>
-	<h3>{% if template == 'index' %}From the Blog{% else %}Latest Posts{% endif %}</h3>
+<section id="from-the-blog" class="thin-border top {% if template == 'index' %}pt-20{% else %}latest-posts{% endif %}">
+	<a href="/blogs/{{ blogs[settings.featured_blog].handle }}.atom" class="rss"></a>
+	<div class="eight columns">	
+		<h3>{% if template == 'index' %}From the Blog{% else %}Latest Posts{% endif %}</h3>
+	</div>
+	<div class="offset-by-six two columns">
+		{% if template == 'index' %}
+		<a href="{{ blogs[settings.featured_blog].url }}" class="view-all-posts">View All Posts &raquo;</a>
+		{% endif %}
+	</div>
 	{% for article in blogs[settings.featured_blog].articles | limit: 2 %}
-	<article {% if template == 'blog' or template == 'article' %}{% unless forloop.last %}class="border bottom" {% endunless %}{% else %}class="border bottom"{% endif %}>
+	<article class="{%if template == 'index'%}sixteen columns {% elsif template == 'blog' or template == 'article' %}{% unless forloop.last %}border bottom{% endunless %}{% else %}border bottom{% endif %}">
 		<h4><a href="{{ article.url }}">{{ article.title | escape }}</a></h4>
 		<h5>Posted by {{ article.author }} on {{ article.created_at | date: "%B %d, %Y" }}</h5>
 		{% if template == 'index' %}
 		<p>
 			{% if article.excerpt == blank %}
-				{{ article.content | strip_html | truncatewords: 25 }}
+			{{ article.content | strip_html | truncatewords: 75 }}
 			{% else %}
-				{{ article.excerpt }}
+			{{ article.excerpt }}
 			{% endif %}
 		</p>
 		{% endif %}
 	</article>
 	{% endfor %}
-	{% if template == 'index' %}
-	<a href="{{ blogs[settings.featured_blog].url }}" class="view-all-posts">View All Posts &raquo;</a>
-	{% endif %}
 </section>
 <!-- END FROM THE BLOG -->

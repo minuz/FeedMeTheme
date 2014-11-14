@@ -19,6 +19,9 @@
 <section id="product-features">
 	{{ pages[settings.home_page].content }}
 </section>
+<section id="feed-me-recommends">
+{% include 'feed-me-recommends' %}
+</section>
 <!--END PRODUCT FEATURES-->
 {% elsif pages.about-us.content != blank %}
 	{{ pages.about-us.content }}

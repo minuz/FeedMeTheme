@@ -54,14 +54,14 @@
   <div class="container clearfix default-background-color safari-container">
     {% if template == 'index' or template == 'blog' or template == 'article' %}
     <!--START MAIN-->
-    <div class="ten columns">
+    <div class="eleven columns">
       {{ content_for_layout }}
     </div>
     <!--END MAIN-->
     <!--START SIDEBAR-->
-    <aside class="five columns offset-by-one nomobile">
+    <aside class="five columns nomobile">
       {% if template == 'index' %}
-                  <h3>Special of the Week</h3>
+                  <h3>FEED of the Week</h3>
 
         {% include 'index-sidebar' %}
       {% elsif template == 'blog' %}
@@ -74,10 +74,11 @@
     {% else %}
       {{ content_for_layout }}
     {% endif %}
+    {% include 'referral' %}
   </div>
   <!-- END CONTAINER-->
   <!-- START FOOTER -->
-  <footer class="no-mt no-border safari-footer">
+  <footer class="no-mt no-border">
     {% include 'site-footer' %}
   </footer>
 

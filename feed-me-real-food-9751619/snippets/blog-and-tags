@@ -1,0 +1,15 @@
+        {% if blogs[settings.featured_blog].articles.size > 0 %}
+          {% include 'latest-posts' %}
+        {% endif %}
+        {% if blog.all_tags != blank %}
+        <!-- START TAGS -->
+        <section id="tags" class="thin-border top">
+          <h3>Tags</h3>
+          <ul>
+            {% for tag in blog.all_tags %}
+            <li><a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}">{{ tag }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+        <!-- END TAGS -->
+        {% endif %}

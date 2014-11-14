@@ -1,3 +1,11 @@
+<!-- START BLOG SECTION -->
+{% if template == 'index'%}
+<div class="container default-background-color">
+{% if blogs[settings.featured_blog].articles.size > 0 %}
+  {% include 'latest-posts' %}
+{% endif %}
+</div>
+{% endif %}
 <!-- START CONTAINER-->
     <div class="container default-background-color border top">
       <div class="five columns">

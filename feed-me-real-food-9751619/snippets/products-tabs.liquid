@@ -51,6 +51,11 @@
         content.show();
         return false;
       });
+
+      var list = $('#product-ingredients').find('ul');
+      if(!list.hasClass('square')){
+        list.addClass('square');
+      }
     });
   });
 </script>

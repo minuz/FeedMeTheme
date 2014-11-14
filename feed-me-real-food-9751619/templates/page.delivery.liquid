@@ -1,0 +1,61 @@
+{{ '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js' | script_tag }}
+{{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js' | script_tag }}
+{{ '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css' | stylesheet_tag }}
+
+<div class="sixteen columns st20 sb30">
+	{% if settings.use_title  %}
+	<h2>{{ page.title }}</h2>
+	{% endif %}
+	{{ page.content }}
+</div>
+
+<div id="city-and-inner-east-content" title="City and Inner East">
+	{{ pages.city-and-inner-east.content }}
+</div>
+
+<div id="inner-sutherland-shire-content" title="Inner Sutherland Shire">
+	{{ pages.inner-sutherland-shire.content }}
+</div>
+
+<div id="other-east-content" title="Other East">
+	{{ pages.other-east.content }}
+</div>
+
+<div id="south-eastern-sydney-content" title="South Eastern Sydney">
+	{{ pages.south-eastern-sydney.content }}
+</div>
+
+<div id="st-george-area-content" title="St. George">
+	{{ pages.st-george-area.content }}
+</div>
+
+<script>
+	$(function() {
+		$( "#city-and-inner-east-content, #inner-sutherland-shire-content, #other-east-content, #south-eastern-sydney-content, #st-george-area-content" ).dialog({
+			autoOpen: false,  
+			width: 300,
+			height: "auto",
+			modal:true
+		});
+
+		$("#city-and-inner-east" ).click(function(){
+			$('#city-and-inner-east-content').dialog("open");
+		});
+
+		$("#inner-sutherland-shire" ).click(function(){
+			$('#inner-sutherland-shire-content').dialog("open");
+		});
+
+		$("#other-east" ).click(function(){
+			$('#other-east-content').dialog("open");
+		});
+
+		$("#south-eastern-sydney" ).click(function(){
+			$('#south-eastern-sydney-content').dialog("open");
+		});
+
+		$("#st-george-area" ).click(function(){
+			$('#st-george-area-content').dialog("open");
+		});
+	});
+</script>	
