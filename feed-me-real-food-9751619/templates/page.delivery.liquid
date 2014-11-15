@@ -8,30 +8,58 @@
 	{% endif %}
 	{{ page.content }}
 </div>
+<div id="content">
 
-<div id="city-and-inner-east-content" title="City and Inner East">
-	{{ pages.city-and-inner-east.content }}
 </div>
+	<div id="city-and-inner-east-content" title="City and Inner East">
+		{{ pages.city-and-inner-east.content }}
+	</div>
 
-<div id="inner-sutherland-shire-content" title="Inner Sutherland Shire">
-	{{ pages.inner-sutherland-shire.content }}
-</div>
+	<div id="inner-sutherland-shire-content" title="Inner Sutherland Shire">
+		{{ pages.inner-sutherland-shire.content }}
+	</div>
 
-<div id="other-east-content" title="Other East">
-	{{ pages.other-east.content }}
-</div>
+	<div id="other-east-content" title="Other East">
+		{{ pages.other-east.content }}
+	</div>
 
-<div id="south-eastern-sydney-content" title="South Eastern Sydney">
-	{{ pages.south-eastern-sydney.content }}
-</div>
+	<div id="south-eastern-sydney-content" title="South Eastern Sydney">
+		{{ pages.south-eastern-sydney.content }}
+	</div>
 
-<div id="st-george-area-content" title="St. George">
-	{{ pages.st-george-area.content }}
-</div>
+	<div id="st-george-area-content" title="St. George">
+		{{ pages.st-george-area.content }}
+	</div>
 
+	<div id="inner-west-content" title="Inner West">
+		{{ pages.inner-west.content }}
+	</div>
+
+	<div id="lower-north-shore-content" title="Lower North Shore">
+		{{ pages.lower-north-shore.content }}
+	</div>
 <script>
 	$(function() {
-		$( "#city-and-inner-east-content, #inner-sutherland-shire-content, #other-east-content, #south-eastern-sydney-content, #st-george-area-content" ).dialog({
+		// $('#content').children('div').each(function () {
+		// 	$(this).dialog({
+		// 		autoOpen: false,  
+		// 		width: 300,
+		// 		height: "auto",
+		// 		modal:true
+		// 	});
+		// });
+
+		// $('#area-delivery-list').children('li').each(function(){
+		// 	var elementLink = $(this).children('a');
+		// 	var elementContentId = $(elementLink).attr('id') + '-content';
+		// 	elementLink.bind('click', function(){
+		// 		console.log("binding click event for "+elementContentId);
+		// 		$(elementContentId).dialog("open");
+		// 	});
+		// });
+
+
+		$( "#city-and-inner-east-content, #inner-sutherland-shire-content, #other-east-content, #south-eastern-sydney-content, #st-george-area-content, #inner-west-content, #lower-north-shore-content" ).dialog({
 			autoOpen: false,  
 			width: 300,
 			height: "auto",
@@ -56,6 +84,14 @@
 
 		$("#st-george-area" ).click(function(){
 			$('#st-george-area-content').dialog("open");
+		});
+
+		$("#inner-west" ).click(function(){
+			$('#inner-west-content').dialog("open");
+		});
+
+		$("#lower-north-shore" ).click(function(){
+			$('#lower-north-shore-content').dialog("open");
 		});
 	});
 </script>	
